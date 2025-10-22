@@ -1,0 +1,13 @@
+PYTHON
+
+How To Venv:
+
+dnf install python3.10
+
+cd "<your python project directory>"
+
+python3.10 -m venv .venv
+
+.venv/bin/activate
+
+pip install ___
