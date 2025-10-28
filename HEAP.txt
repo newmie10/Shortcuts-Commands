@@ -1,0 +1,23 @@
+Heap is semi-chaotic, nondeterministic system. 
+- What has happened bforehand and how the program is run can make large changes in how the heap is set up.
+- Heap is used for variables of dynamic size. 
+	- Make in C++ uses malloc and constructors under the hood, Delete calls destructors and free
+- glibc does whte work in the background for handing off the malloc return
+- Browser uses another heap besides the main one. 
+DLMalloc is the Doug Lea OG heap allocator
+- Stores all data about heap status in-line
+	- All metadata about a heap chunk is stored directly before that chunk in memory.
+	- Each page broken into chunks, with the chunk header (size of prev chunk, size of chunk, in use status of chunk)
+	- Chunks have a min size of greater than twice the size of the header. 
+- BRK is the raw call to get the memory
+	- Malloc is a library call through libc, the heap allocator handles all of the kernel calls to BRK and then the heap allocator handle bookkeeping
+		- and interacting with the kernel
+Problems
+	1. Storing free heaps in doubly linked list so we dont have to search entire heap for free chunks
+	2. Fragmentation: On free, check the neighbors, and if they are not in use combine the chunks into one larger one to avoid fragmentation
+		- Next, remove the chunks from the free list. 
+	3. Make allocation constant time - look aside lists
+		- Singly linked list for each power of two sized free chunk, always add to and remove from head. 
+
+
+Full page size = chunk + header, when mprotecting a page can you write to the header? Say it is size of all memory almost and force heap allocations to a certain place?

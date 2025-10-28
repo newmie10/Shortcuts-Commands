@@ -1,0 +1,2 @@
+run a python script and input it to stdin -
+	r < <(./ex4.py)

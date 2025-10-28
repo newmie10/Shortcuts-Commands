@@ -1,0 +1,2 @@
+default command- 
+	gobuster dir -u <url> -w <wordlist.txt> -x <file_extensions>
